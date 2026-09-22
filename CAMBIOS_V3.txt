@@ -1,0 +1,18 @@
+CAMBIOS PRINCIPALES — VERSIÓN 3.0 COMPLETA
+==========================================
+
+1. Se eliminó el comportamiento de navegación bloqueada: Inicio, Horario, Tareas, Alertas y Perfil son botones reales.
+2. Nuevo Dashboard dinámico con progreso semanal y próximas actividades.
+3. Horario completo: crear, editar, eliminar y validar superposición de clases.
+4. Tareas completas: crear, editar, buscar, filtrar, completar/reabrir, eliminar, prioridad y vencimiento.
+5. Nuevo Calendario mensual con tareas, evaluaciones y alertas por fecha.
+6. Evaluaciones y notas: crear, editar, registrar resultado, peso porcentual, promedio general y por materia.
+7. Alertas: crear, editar, activar/desactivar, eliminar, anticipación configurable y Notification API.
+8. Nuevo módulo Materias con docente, aula, color y métricas.
+9. Perfil editable y ajustes persistentes.
+10. Modo oscuro funcional.
+11. Exportación e importación de respaldo JSON.
+12. Persistencia total en localStorage.
+13. Migración básica de datos de la versión anterior cuando existen.
+14. Archivos renombrados styles-v3.css y app-v3.js para evitar confusión/caché con la versión anterior.
+15. PWA básica: manifest y service worker cuando se ejecuta por localhost/HTTPS.

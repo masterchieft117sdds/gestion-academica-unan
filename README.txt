@@ -1,55 +1,33 @@
-PROTOTIPO FUNCIONAL — GESTIÓN ACADÉMICA
-Proyecto Integrador · Fase 2
+GESTIÓN ACADÉMICA — v3.0 COMPLETA
+=================================
 
-MÓDULOS IMPLEMENTADOS
-1. Pantalla de bienvenida y acceso al prototipo.
-2. Creación y edición de perfil del estudiante (almacenamiento local).
-3. Inicio dinámico con contadores de tareas, evaluaciones y alertas.
-4. Próximas actividades combinando clases, tareas, evaluaciones y recordatorios.
-5. Horario académico:
-   - Visualización por día.
-   - Crear, editar y eliminar clases.
-   - Validación de horas y detección de choques de horario.
-6. Tareas:
-   - Crear, editar y eliminar.
-   - Prioridad alta/media/baja.
-   - Fecha límite y notas.
-   - Marcar como completada o reabrir.
-   - Filtros: pendientes, completadas y todas.
-7. Evaluaciones:
-   - Crear, editar y eliminar.
-   - Tipo, fecha, hora, lugar y porcentaje.
-   - Marcar como realizada o pendiente.
-   - Indicador de próxima evaluación.
-8. Recordatorios:
-   - Crear, editar, eliminar, activar y desactivar.
-   - Fecha, hora, categoría y notas.
-   - Solicitud opcional de notificaciones del navegador.
-   - Los avisos del sistema funcionan mientras la aplicación está abierta y el navegador concede permiso.
-9. Perfil y mantenimiento:
-   - Editar datos personales académicos.
-   - Exportar respaldo JSON.
-   - Importar respaldo JSON.
-   - Restablecer datos de demostración.
-10. Persistencia local con localStorage: los cambios se conservan al recargar.
-11. Diseño responsive para PC y teléfono.
+Esta versión reemplaza el prototipo anterior y habilita todos los módulos principales.
 
-CÓMO ABRIRLO
-- En Windows: doble clic en index.html.
-- Para una demostración más estable y para habilitar mejor las funciones del navegador:
+INICIO RÁPIDO
+1. Extrae la carpeta completa.
+2. Abre index.html en Chrome, Edge o Firefox.
+3. Verifica que la bienvenida muestre claramente “v3.0 · COMPLETA”.
+
+MÓDULOS FUNCIONALES
+- Inicio dinámico con progreso semanal y próximas actividades.
+- Horario: alta, edición y eliminación de clases + detección de choque de horario.
+- Tareas: alta, edición, completado, filtros, búsqueda, prioridades y vencimientos.
+- Calendario mensual: combina tareas, evaluaciones y recordatorios por fecha.
+- Evaluaciones y notas: alta, edición, estado, calificación y promedio por materia.
+- Alertas: alta, edición, activación/desactivación y notificaciones del navegador cuando están disponibles.
+- Materias: alta, edición, eliminación segura, docente, aula, color y métricas.
+- Perfil y ajustes: datos del estudiante, modo oscuro, aviso anticipado.
+- Respaldo: exportar e importar JSON.
+- Persistencia automática en localStorage.
+
+IMPORTANTE SOBRE NOTIFICACIONES
+Los navegadores pueden bloquear las notificaciones al abrir index.html directamente como archivo local. Todas las alertas siguen funcionando dentro de la app; para notificaciones del sistema, sirve la carpeta con un servidor local/HTTPS.
+
+PRUEBA RÁPIDA CON SERVIDOR LOCAL
+Si tienes Python instalado, abre una terminal dentro de esta carpeta y ejecuta:
   python -m http.server 8000
-  Luego abrir http://localhost:8000
+Luego abre:
+  http://localhost:8000
 
-FLUJO SUGERIDO PARA PRESENTAR
-1. Abrir index.html y entrar al prototipo.
-2. Mostrar el inicio y sus contadores dinámicos.
-3. Entrar a Horario, agregar una clase y luego editarla.
-4. Entrar a Tareas, crear una tarea y marcarla como completada.
-5. Agregar una evaluación y mostrar el indicador de próxima evaluación.
-6. Crear un recordatorio y activar/desactivar la alerta.
-7. Crear o editar el perfil.
-8. Mostrar que los datos persisten al recargar la página.
-9. Opcional: exportar un respaldo desde Perfil.
-
-NOTA TÉCNICA
-Este prototipo no utiliza servidor ni base de datos remota. Toda la información se almacena localmente en el navegador. Para una fase posterior se puede conectar a una API/backend y una base de datos real, implementar autenticación institucional y notificaciones push en segundo plano.
+VERSIÓN
+3.0.0 — 22/09/2026
