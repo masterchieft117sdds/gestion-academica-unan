@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#24558d" />
+  <meta name="description" content="Prototipo funcional de gestión académica para organización universitaria." />
   <title>Gestión Académica — Prototipo funcional</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -11,24 +12,19 @@
   <main class="stage">
     <section class="phone" aria-label="Prototipo móvil Gestión Académica">
       <div class="statusbar">
-        <span>9:41</span><span>● ))) ▣</span>
+        <span id="statusTime">9:41</span><span>● ))) ▣</span>
       </div>
 
-      <!-- PANTALLA DE BIENVENIDA -->
+      <!-- BIENVENIDA -->
       <section class="screen active" id="welcomeScreen">
         <div class="welcome-hero">
           <div class="brand-row">
             <img src="assets/crest_unan.png" alt="Escudo UNAN-León" />
-            <div>
-              <div class="unan-word">UNAN</div>
-              <div class="unan-sub">UNAN-León</div>
-            </div>
+            <div><div class="unan-word">UNAN</div><div class="unan-sub">UNAN-León</div></div>
           </div>
           <h1>Gestión<br>Académica</h1>
           <p>Organiza tus actividades universitarias</p>
-          <div class="hero-icons" aria-hidden="true">
-            <span>📅</span><span>✅</span><span>🔔</span><span>📊</span>
-          </div>
+          <div class="hero-icons" aria-hidden="true"><span>📅</span><span>✅</span><span>🔔</span><span>📊</span></div>
         </div>
 
         <div class="feature-grid">
@@ -40,122 +36,230 @@
 
         <div class="cta-stack">
           <button class="btn primary" id="enterBtn">Entrar al prototipo <span>›</span></button>
-          <button class="btn secondary" id="createBtn">Crear cuenta <span>›</span></button>
+          <button class="btn secondary" id="createBtn">Crear perfil <span>›</span></button>
         </div>
         <p class="institution">UNAN-León<br><small>Facultad de Ciencias y Tecnología</small></p>
       </section>
 
-      <!-- PANTALLA DE INICIO / MENÚ -->
+      <!-- CREAR / EDITAR PERFIL -->
+      <section class="screen" id="profileFormScreen">
+        <header class="app-header">
+          <div><h2 id="profileFormTitle">Crear perfil</h2><p>Datos locales del estudiante</p></div>
+          <button class="icon-btn" data-go="welcomeScreen" title="Cerrar">×</button>
+        </header>
+        <form class="content form-content scrollable" id="profileForm">
+          <div class="form-intro">Estos datos se guardan únicamente en este navegador para personalizar el prototipo.</div>
+          <label>Nombre completo<input required name="name" maxlength="70" placeholder="Ej. Ana Pérez" /></label>
+          <label>Correo institucional<input type="email" name="email" maxlength="80" placeholder="nombre@unanleon.edu.ni" /></label>
+          <label>Carrera<input required name="career" maxlength="80" placeholder="Ej. Ingeniería en Sistemas" /></label>
+          <div class="two-col">
+            <label>Año / nivel<select name="level"><option>1.º año</option><option>2.º año</option><option>3.º año</option><option>4.º año</option><option>5.º año</option></select></label>
+            <label>Turno<select name="shift"><option>Matutino</option><option>Vespertino</option><option>Nocturno</option><option>Mixto</option></select></label>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn secondary" id="cancelProfileBtn">Cancelar</button>
+            <button type="submit" class="btn primary">Guardar perfil</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- INICIO -->
       <section class="screen" id="homeScreen">
         <header class="app-header">
           <div><h2>Inicio</h2><p>Resumen académico</p></div>
           <button class="icon-btn" id="logoutBtn" title="Volver a bienvenida">↩</button>
         </header>
         <div class="content scrollable">
-          <h3>¡Hola, estudiante!</h3>
-          <p class="muted">Estas son tus actividades de hoy.</p>
+          <h3 id="greeting">¡Hola, estudiante!</h3>
+          <p class="muted" id="todayLabel">Estas son tus actividades de hoy.</p>
 
           <div class="stats-row">
-            <div class="stat"><b id="pendingCount">3</b><span>Tareas</span></div>
-            <div class="stat"><b>2</b><span>Evaluaciones</span></div>
-            <div class="stat"><b>4</b><span>Alertas</span></div>
+            <button class="stat" data-go="tasksScreen"><b id="pendingCount">0</b><span>Tareas pendientes</span></button>
+            <button class="stat" data-go="evaluationsScreen"><b id="evaluationCount">0</b><span>Evaluaciones</span></button>
+            <button class="stat" data-go="remindersScreen"><b id="alertCount">0</b><span>Alertas activas</span></button>
           </div>
 
           <h3 class="section-title">Menú principal</h3>
           <div class="menu-grid">
-            <button class="menu-card" data-go="scheduleScreen"><span>📅</span><b>Horario</b><small>Primera opción</small></button>
-            <button class="menu-card disabled"><span>📝</span><b>Tareas</b><small>Próxima fase</small></button>
-            <button class="menu-card disabled"><span>🧪</span><b>Evaluaciones</b><small>Próxima fase</small></button>
-            <button class="menu-card disabled"><span>🔔</span><b>Recordatorios</b><small>Próxima fase</small></button>
+            <button class="menu-card" data-go="scheduleScreen"><span>📅</span><b>Horario</b><small>Clases semanales</small></button>
+            <button class="menu-card" data-go="tasksScreen"><span>📝</span><b>Tareas</b><small>Entregas y pendientes</small></button>
+            <button class="menu-card" data-go="evaluationsScreen"><span>🧪</span><b>Evaluaciones</b><small>Exámenes y exposiciones</small></button>
+            <button class="menu-card" data-go="remindersScreen"><span>🔔</span><b>Recordatorios</b><small>Alertas personales</small></button>
           </div>
 
-          <div class="next-card">
-            <span class="dot blue"></span>
-            <div><b>Programación Móvil</b><small>Próxima clase · 8:00 AM</small></div>
-          </div>
-          <div class="next-card">
-            <span class="dot red"></span>
-            <div><b>Proyecto Integrador II</b><small>Revisión de avances · 4:00 PM</small></div>
-          </div>
+          <div class="section-heading"><h3 class="section-title">Próximas actividades</h3><small id="nextActivitiesCount"></small></div>
+          <div id="nextActivities" class="activity-list"></div>
         </div>
-        <nav class="bottom-nav">
-          <button class="active" data-go="homeScreen">⌂<span>Inicio</span></button>
-          <button data-go="scheduleScreen">▦<span>Horario</span></button>
-          <button class="disabled">☷<span>Tareas</span></button>
-          <button class="disabled">♢<span>Alertas</span></button>
-          <button class="disabled">○<span>Perfil</span></button>
-        </nav>
+        <nav class="bottom-nav" data-nav="homeScreen"></nav>
       </section>
 
-      <!-- PRIMERA OPCIÓN DEL MENÚ: HORARIO -->
+      <!-- HORARIO -->
       <section class="screen" id="scheduleScreen">
         <header class="app-header">
-          <div><h2>Horario académico</h2><p>Semana actual</p></div>
+          <div><h2>Horario académico</h2><p>Organización semanal</p></div>
           <button class="icon-btn" data-go="homeScreen" title="Volver">‹</button>
         </header>
-
         <div class="content schedule-content scrollable">
           <div class="days" id="daysBar">
-            <button data-day="Lun">Lun</button>
-            <button data-day="Mar">Mar</button>
-            <button class="active" data-day="Mié">Mié</button>
-            <button data-day="Jue">Jue</button>
-            <button data-day="Vie">Vie</button>
+            <button data-day="Lun">Lun</button><button data-day="Mar">Mar</button><button class="active" data-day="Mié">Mié</button><button data-day="Jue">Jue</button><button data-day="Vie">Vie</button>
           </div>
-
           <div id="scheduleList" class="schedule-list"></div>
-          <div id="emptyState" class="empty-state hidden">No hay clases registradas para este día.</div>
+          <div id="emptyState" class="empty-state hidden"><span>📭</span><b>Sin clases</b><small>No hay clases registradas para este día.</small></div>
         </div>
-
         <button class="fab" id="addClassBtn" aria-label="Agregar clase">+</button>
-        <nav class="bottom-nav">
-          <button data-go="homeScreen">⌂<span>Inicio</span></button>
-          <button class="active" data-go="scheduleScreen">▦<span>Horario</span></button>
-          <button class="disabled">☷<span>Tareas</span></button>
-          <button class="disabled">♢<span>Alertas</span></button>
-          <button class="disabled">○<span>Perfil</span></button>
-        </nav>
+        <nav class="bottom-nav" data-nav="scheduleScreen"></nav>
       </section>
 
-      <!-- FORMULARIO FUNCIONAL DE CAPTURA -->
+      <!-- FORMULARIO CLASE -->
       <section class="screen" id="captureScreen">
         <header class="app-header">
-          <div><h2>Registrar clase</h2><p>Captura de horario</p></div>
+          <div><h2 id="classFormTitle">Registrar clase</h2><p>Datos del horario</p></div>
           <button class="icon-btn" data-go="scheduleScreen" title="Cerrar">×</button>
         </header>
         <form class="content form-content scrollable" id="classForm">
-          <label>Asignatura
-            <input required name="subject" maxlength="60" placeholder="Ej. Programación Móvil" />
-          </label>
-          <label>Día
-            <select required name="day">
-              <option>Lun</option><option>Mar</option><option selected>Mié</option><option>Jue</option><option>Vie</option>
-            </select>
-          </label>
+          <label>Asignatura<input required name="subject" maxlength="60" placeholder="Ej. Programación Móvil" /></label>
+          <label>Día<select required name="day"><option>Lun</option><option>Mar</option><option>Mié</option><option>Jue</option><option>Vie</option></select></label>
           <div class="two-col">
             <label>Hora inicio<input required type="time" name="start" value="08:00" /></label>
             <label>Hora fin<input required type="time" name="end" value="09:30" /></label>
           </div>
-          <label>Aula / laboratorio
-            <input required name="place" maxlength="40" placeholder="Ej. Aula 23" />
-          </label>
-          <label>Color identificador
-            <select name="color">
-              <option value="blue">Azul</option>
-              <option value="green">Verde</option>
-              <option value="orange">Naranja</option>
-              <option value="red">Rojo</option>
-            </select>
-          </label>
-          <div class="form-actions">
-            <button type="button" class="btn secondary" data-go="scheduleScreen">Cancelar</button>
-            <button type="submit" class="btn primary">Guardar clase</button>
-          </div>
-          <p class="helper">Al guardar, la clase aparece de inmediato en el horario y queda almacenada en este dispositivo.</p>
+          <label>Aula / laboratorio<input required name="place" maxlength="40" placeholder="Ej. Aula 23" /></label>
+          <label>Color identificador<select name="color"><option value="blue">Azul</option><option value="green">Verde</option><option value="orange">Naranja</option><option value="red">Rojo</option><option value="purple">Morado</option></select></label>
+          <div class="form-actions"><button type="button" class="btn secondary" data-go="scheduleScreen">Cancelar</button><button type="submit" class="btn primary">Guardar clase</button></div>
+          <p class="helper">El sistema detecta choques de horario antes de guardar.</p>
         </form>
       </section>
 
-      <div class="toast" id="toast" role="status"></div>
+      <!-- TAREAS -->
+      <section class="screen" id="tasksScreen">
+        <header class="app-header">
+          <div><h2>Tareas</h2><p>Entregas y seguimiento</p></div>
+          <button class="icon-btn" data-go="homeScreen" title="Volver">‹</button>
+        </header>
+        <div class="content scrollable">
+          <div class="toolbar compact-toolbar">
+            <div class="segmented" id="taskFilter">
+              <button class="active" data-filter="pending">Pendientes</button><button data-filter="done">Completadas</button><button data-filter="all">Todas</button>
+            </div>
+          </div>
+          <div id="taskList" class="stack-list"></div>
+          <div id="taskEmpty" class="empty-state hidden"><span>✅</span><b>Todo al día</b><small>No hay tareas en esta vista.</small></div>
+        </div>
+        <button class="fab" id="addTaskBtn" aria-label="Agregar tarea">+</button>
+        <nav class="bottom-nav" data-nav="tasksScreen"></nav>
+      </section>
+
+      <section class="screen" id="taskFormScreen">
+        <header class="app-header">
+          <div><h2 id="taskFormTitle">Nueva tarea</h2><p>Planifica una entrega</p></div>
+          <button class="icon-btn" data-go="tasksScreen" title="Cerrar">×</button>
+        </header>
+        <form class="content form-content scrollable" id="taskForm">
+          <label>Tarea<input required name="title" maxlength="80" placeholder="Ej. Entregar informe del proyecto" /></label>
+          <label>Asignatura<input required name="subject" maxlength="60" placeholder="Ej. Ingeniería de Software II" /></label>
+          <div class="two-col">
+            <label>Fecha límite<input required type="date" name="dueDate" /></label>
+            <label>Prioridad<select name="priority"><option value="high">Alta</option><option value="medium" selected>Media</option><option value="low">Baja</option></select></label>
+          </div>
+          <label>Notas<textarea name="notes" maxlength="240" rows="4" placeholder="Indicaciones, enlaces o detalles de la entrega"></textarea></label>
+          <div class="form-actions"><button type="button" class="btn secondary" data-go="tasksScreen">Cancelar</button><button type="submit" class="btn primary">Guardar tarea</button></div>
+        </form>
+      </section>
+
+      <!-- EVALUACIONES -->
+      <section class="screen" id="evaluationsScreen">
+        <header class="app-header">
+          <div><h2>Evaluaciones</h2><p>Exámenes, pruebas y exposiciones</p></div>
+          <button class="icon-btn" data-go="homeScreen" title="Volver">‹</button>
+        </header>
+        <div class="content scrollable">
+          <div class="summary-banner"><span>🧪</span><div><b id="nextEvaluationTitle">Sin evaluaciones próximas</b><small id="nextEvaluationInfo">Agrega una evaluación para comenzar.</small></div></div>
+          <div id="evaluationList" class="stack-list"></div>
+          <div id="evaluationEmpty" class="empty-state hidden"><span>📚</span><b>Sin evaluaciones</b><small>No hay evaluaciones registradas.</small></div>
+        </div>
+        <button class="fab" id="addEvaluationBtn" aria-label="Agregar evaluación">+</button>
+        <nav class="bottom-nav" data-nav="evaluationsScreen"></nav>
+      </section>
+
+      <section class="screen" id="evaluationFormScreen">
+        <header class="app-header">
+          <div><h2 id="evaluationFormTitle">Nueva evaluación</h2><p>Agenda académica</p></div>
+          <button class="icon-btn" data-go="evaluationsScreen" title="Cerrar">×</button>
+        </header>
+        <form class="content form-content scrollable" id="evaluationForm">
+          <label>Evaluación<input required name="title" maxlength="80" placeholder="Ej. Segundo parcial" /></label>
+          <label>Asignatura<input required name="subject" maxlength="60" placeholder="Ej. Base de Datos II" /></label>
+          <div class="two-col">
+            <label>Fecha<input required type="date" name="date" /></label>
+            <label>Hora<input required type="time" name="time" value="08:00" /></label>
+          </div>
+          <div class="two-col">
+            <label>Tipo<select name="type"><option>Examen</option><option>Prueba corta</option><option>Exposición</option><option>Defensa</option><option>Entrega evaluada</option></select></label>
+            <label>Valor (%)<input type="number" name="weight" min="0" max="100" value="20" /></label>
+          </div>
+          <label>Lugar<input name="place" maxlength="50" placeholder="Ej. Aula 21" /></label>
+          <div class="form-actions"><button type="button" class="btn secondary" data-go="evaluationsScreen">Cancelar</button><button type="submit" class="btn primary">Guardar evaluación</button></div>
+        </form>
+      </section>
+
+      <!-- RECORDATORIOS -->
+      <section class="screen" id="remindersScreen">
+        <header class="app-header">
+          <div><h2>Recordatorios</h2><p>Alertas para no olvidar nada</p></div>
+          <button class="icon-btn" data-go="homeScreen" title="Volver">‹</button>
+        </header>
+        <div class="content scrollable">
+          <div class="notification-box">
+            <div><b>Notificaciones del navegador</b><small id="notificationStatus">Puedes activar avisos mientras la app esté abierta.</small></div>
+            <button class="mini-btn" id="enableNotificationsBtn">Activar</button>
+          </div>
+          <div id="reminderList" class="stack-list"></div>
+          <div id="reminderEmpty" class="empty-state hidden"><span>🔕</span><b>Sin recordatorios</b><small>Crea una alerta para una fecha y hora.</small></div>
+        </div>
+        <button class="fab" id="addReminderBtn" aria-label="Agregar recordatorio">+</button>
+        <nav class="bottom-nav" data-nav="remindersScreen"></nav>
+      </section>
+
+      <section class="screen" id="reminderFormScreen">
+        <header class="app-header">
+          <div><h2 id="reminderFormTitle">Nuevo recordatorio</h2><p>Configura una alerta</p></div>
+          <button class="icon-btn" data-go="remindersScreen" title="Cerrar">×</button>
+        </header>
+        <form class="content form-content scrollable" id="reminderForm">
+          <label>Título<input required name="title" maxlength="80" placeholder="Ej. Llevar informe impreso" /></label>
+          <div class="two-col">
+            <label>Fecha<input required type="date" name="date" /></label>
+            <label>Hora<input required type="time" name="time" value="07:00" /></label>
+          </div>
+          <label>Categoría<select name="category"><option>Académico</option><option>Tarea</option><option>Evaluación</option><option>Clase</option><option>Personal</option></select></label>
+          <label>Notas<textarea name="notes" maxlength="200" rows="3" placeholder="Información adicional"></textarea></label>
+          <label class="switch-row"><span><b>Recordatorio activo</b><small>Puede desactivarse después sin eliminarlo.</small></span><input type="checkbox" name="enabled" checked /></label>
+          <div class="form-actions"><button type="button" class="btn secondary" data-go="remindersScreen">Cancelar</button><button type="submit" class="btn primary">Guardar recordatorio</button></div>
+        </form>
+      </section>
+
+      <!-- PERFIL -->
+      <section class="screen" id="profileScreen">
+        <header class="app-header">
+          <div><h2>Perfil</h2><p>Preferencias y datos</p></div>
+          <button class="icon-btn" data-go="homeScreen" title="Volver">‹</button>
+        </header>
+        <div class="content scrollable">
+          <div class="profile-card">
+            <div class="avatar" id="profileAvatar">E</div>
+            <div><h3 id="profileName">Estudiante</h3><p id="profileCareer">Perfil de demostración</p><small id="profileMeta">UNAN-León</small></div>
+          </div>
+          <button class="settings-row" id="editProfileBtn"><span>👤</span><div><b>Editar perfil</b><small>Nombre, carrera, nivel y turno</small></div><i>›</i></button>
+          <button class="settings-row" id="exportDataBtn"><span>💾</span><div><b>Exportar respaldo</b><small>Descarga tus datos en formato JSON</small></div><i>›</i></button>
+          <button class="settings-row" id="importDataBtn"><span>📥</span><div><b>Importar respaldo</b><small>Restaura datos desde un archivo JSON</small></div><i>›</i></button>
+          <input type="file" id="importFileInput" accept="application/json,.json" hidden />
+          <button class="settings-row danger-row" id="resetDataBtn"><span>↺</span><div><b>Restablecer datos</b><small>Recupera los datos de demostración</small></div><i>›</i></button>
+          <div class="about-card"><b>Gestión Académica</b><small>Prototipo funcional · Fase 2</small><p>Horario, tareas, evaluaciones, recordatorios, perfil y persistencia local.</p></div>
+        </div>
+        <nav class="bottom-nav" data-nav="profileScreen"></nav>
+      </section>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </section>
   </main>
   <script src="app.js"></script>

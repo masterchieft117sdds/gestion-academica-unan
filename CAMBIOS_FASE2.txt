@@ -1,0 +1,28 @@
+CAMBIOS PRINCIPALES — FASE 2
+
+FUNCIONES DESBLOQUEADAS
+- Tareas: CRUD completo, filtros, prioridades, fechas y estado completado.
+- Evaluaciones: CRUD completo, tipos, fechas, horas, porcentaje y estado realizada.
+- Recordatorios: CRUD completo, activar/desactivar y soporte opcional de notificaciones del navegador.
+- Perfil: creación/edición de datos académicos.
+- Navegación inferior: Inicio, Horario, Tareas, Alertas y Perfil ya son accesibles.
+
+MEJORAS DEL MÓDULO EXISTENTE
+- Horario ahora permite editar además de crear/eliminar.
+- Detección de choques de horario.
+- Inicio con contadores reales y próximos eventos calculados con los datos guardados.
+- Reloj de barra superior dinámico.
+- Persistencia local de todos los módulos.
+
+NUEVAS HERRAMIENTAS
+- Exportación de respaldo a JSON.
+- Importación/restauración desde JSON.
+- Restablecimiento de datos de demostración.
+- Diseño responsive ampliado.
+
+LIMITACIONES QUE REQUIEREN UNA FASE CON BACKEND
+- Inicio de sesión institucional real y contraseñas.
+- Sincronización entre dispositivos.
+- Base de datos remota multiusuario.
+- Notificaciones push cuando la aplicación está completamente cerrada.
+- Integración con sistemas oficiales de la universidad.
